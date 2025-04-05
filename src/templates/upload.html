@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Letter Prediction Magic</h1>
+            <p class="subtitle">Upload an image and let the AI reveal its secrets!</p>
+        </header>
+
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data" action="/predict" class="upload-form">
+                <div class="file-input-wrapper">
+                    <input type="file" name="file" id="file-input" required>
+                    <label for="file-input" class="file-label">Choose an Image</label>
+                </div>
+                <button type="submit" class="predict-btn">Predict Now</button>
+            </form>
+        </div>
+
+        {% if prediction %}
+            <div class="results animate-result">
+                <h2>Prediction Results</h2>
+                <div class="result-box">
+                    <p><span class="label">Predicted Letter:</span> <span class="value">{{ prediction }}</span></p>
+                    <p><span class="label">True Label:</span> <span class="value">{{ true_label }}</span></p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
