@@ -137,17 +137,11 @@ python src/predict_image.py
 
 This project was developed by the following team members:
 
-- **Mathys FRANCO**  
-  - GitHub: [Mathys](https://github.com/mathysfrc)  
-  - LinkedIn: [Mathys Franco](https://linkedin.com/in/mathys-franco)  
+- [Mathys Franco](https://linkedin.com/in/mathys-franco)  
 
-- **Cameron NOUPOUE**  
-  - GitHub: [Cameron](https://github.com/n-kmron)  
-  - LinkedIn: [Cameron Noupoue](https://linkedin.com/in/cnoupoue)  
+- [Cameron Noupoue](https://linkedin.com/in/cnoupoue)  
 
-- **Jobelin KOM**  
-  - GitHub: [Jobelin](https://github.com/jkom4)
-  - LinkedIn: [Jobelin Kom](https://www.linkedin.com/in/jobelin-kom)  
+- [Jobelin Kom](https://www.linkedin.com/in/jobelin-kom)  
 
 
 
