@@ -86,9 +86,9 @@ cd SignLanguageRecognition
 
 ## 2. Install Dependencies
 
-Ensure you have Python installed, then install the required libraries:
-```bash
-pip install numpy pandas flask werkzeug
+Once your **`requirements.txt`** file is ready, you can install all the dependencies with a single command:
+``bash
+pip install -r requirements.txt
 ```
 
 ## 3. Train the Model
