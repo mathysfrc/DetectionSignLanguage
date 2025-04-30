@@ -87,7 +87,8 @@ cd SignLanguageRecognition
 ## 2. Install Dependencies
 
 Once your **`requirements.txt`** file is ready, you can install all the dependencies with a single command:
-``bash
+
+```bash
 pip install -r requirements.txt
 ```
 
