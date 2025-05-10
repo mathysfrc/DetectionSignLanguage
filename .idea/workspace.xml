@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fe0fd14-5c48-4ca5-9a55-642c4abd07e1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model_weights.npz" beforeDir="false" afterPath="$PROJECT_DIR$/model_weights.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/neural_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/neural_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/predict_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict_image.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,6 +117,11 @@
       <workItem from="1743491295947" duration="596000" />
       <workItem from="1743528937507" duration="7000" />
       <workItem from="1743871531160" duration="2469000" />
+      <workItem from="1743892180663" duration="1139000" />
+      <workItem from="1744784498212" duration="104000" />
+      <workItem from="1744790664253" duration="905000" />
+      <workItem from="1746364764078" duration="349000" />
+      <workItem from="1746912235837" duration="3661000" />
     </task>
     <servers />
   </component>
@@ -123,11 +129,11 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$app_py.coverage" NAME="app.py Coverage Results" MODIFIED="1743871541082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$neural_network.coverage" NAME="neural_network Coverage Results" MODIFIED="1743871560631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$train_model.coverage" NAME="train_model Coverage Results" MODIFIED="1743873190203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$app_py.coverage" NAME="app.py Coverage Results" MODIFIED="1744784499105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$neural_network.coverage" NAME="neural_network Coverage Results" MODIFIED="1744791586271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$train_model.coverage" NAME="train_model Coverage Results" MODIFIED="1744790668476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$app.coverage" NAME="app Coverage Results" MODIFIED="1743269196956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$predict_image.coverage" NAME="predict_image Coverage Results" MODIFIED="1743872165049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$predict_image.coverage" NAME="predict_image Coverage Results" MODIFIED="1744791592391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$model.coverage" NAME="model Coverage Results" MODIFIED="1743269133857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LANGUAGE_DES_SIGNES$test.coverage" NAME="test Coverage Results" MODIFIED="1743268610254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

@@ -1,92 +1,41 @@
-import numpy as np
 import pandas as pd
-import os
-from flask import Flask, request, render_template, jsonify
-from werkzeug.utils import secure_filename
+import numpy as np
 from neural_network import NeuralNetwork
 
-app = Flask(__name__, static_folder='src/static', template_folder='src/templates')
-UPLOAD_FOLDER = 'uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# Assurez-vous que le dossier uploads existe
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-
-def load_model():
-    nn = NeuralNetwork()
-    weights = np.load('model_weights.npz')
-    nn.weights1 = weights['w1']
-    nn.bias1 = weights['b1']
-    nn.weights2 = weights['w2']
-    nn.bias2 = weights['b2']
-    nn.weights3 = weights['w3']
-    nn.bias3 = weights['b3']
-    return nn
-
-def preprocess_image(features):
-    if len(features) != 42:
-        raise ValueError("L'image doit avoir 42 coordonnées")
-    return np.array([features])
-
-def predict(features):
-    nn = load_model()
-    X = preprocess_image(features)
-    probabilities = nn.forward(X)
-    prediction = nn.predict(X)[0]
-    letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E'}
-    return letters[prediction]
-
-def extract_features_from_image(image_path):
-    if not os.path.exists(image_path):
-        raise FileNotFoundError(f"L'image {image_path} n'existe pas")
-
+def load_and_prepare_data():
     data = pd.read_csv('src/datas/data_formatted.csv', header=None)
-    filename = os.path.basename(image_path)
-    try:
-        image_num = int(''.join(filter(str.isdigit, filename))) - 1
-    except ValueError:
-        raise ValueError(f"Impossible d'extraire le numéro de l'image depuis {filename}")
 
-    if image_num < 0 or image_num >= len(data):
-        raise ValueError(f"Numéro d'image {image_num} hors plage (0 à {len(data) - 1})")
+    print(f"Nombre total de colonnes dans le CSV : {data.shape[1]}")
 
-    features = data.iloc[image_num, :42].values
-    true_label_onehot = data.iloc[image_num, 42:].values
-    true_label = np.argmax(true_label_onehot) + 1
-    return features, true_label
+    X = data.iloc[:, :42].values  # Les 42 premières colonnes sont les features
+    y_onehot = data.iloc[:, 42:].values  # Les colonnes suivantes sont les labels one-hot
+    y = np.argmax(y_onehot, axis=1)  # Transformation en labels catégoriels
 
-@app.route('/')
-def upload_form():
-    return render_template("upload.html")
+    print(f"Forme de X : {X.shape}")
+    print(f"Exemple de y : {y[:5]}")
 
-@app.route('/predict', methods=['POST'])
-def predict_image():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
+    indices = np.random.permutation(X.shape[0])
+    train_idx, val_idx = indices[:250], indices[250:300]
 
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
+    X_train, X_val = X[train_idx], X[val_idx]
+    y_train, y_val = y[train_idx], y[val_idx]
 
-    if file:
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(file_path)
+    return X_train, X_val, y_train, y_val
 
-        try:
-            features, true_label = extract_features_from_image(file_path)
-            predicted_letter = predict(features)
-            letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E'}
+def train():
+    X_train, X_val, y_train, y_val = load_and_prepare_data()
 
-            # Supprimez le fichier après traitement
-            os.remove(file_path)
+    nn = NeuralNetwork()
+    nn.train(X_train, y_train, epochs=1000, learning_rate=0.5)  # Plus d'epochs, learning_rate augmenté
 
-            return render_template('upload.html',
-                                 prediction=predicted_letter,
-                                 true_label=letters[true_label])
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
+    predictions = nn.predict(X_val)
+    accuracy = np.mean(predictions == (y_val + 1))  # Ajustement pour la classe 1-5
+    print(f"Validation Accuracy: {accuracy:.4f}")
+
+    np.savez('model_weights.npz',
+             w1=nn.weights_input_hidden, b1=nn.bias_input_hidden,
+             w2=nn.weights_hidden_middle, b2=nn.bias_hidden_middle,
+             w3=nn.weights_middle_output, b3=nn.bias_middle_output)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    train()
