@@ -31,9 +31,11 @@ def preprocess_image(features):
 def predict(features):
     nn = load_model()
     X = preprocess_image(features)
-    prediction = nn.predict(X)[0]
-    letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E'}
-    return letters[prediction]
+    output = nn.predict(X)
+    # Récupérer la classe prédite, en supposant que la sortie soit une probabilité softmax
+    predicted_class = np.argmax(output)
+    letters = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E'}  # La classe commence à 0 pour un tableau d'indices
+    return letters[predicted_class]
 
 def extract_features_from_image(image_path):
     if not os.path.exists(image_path):
@@ -51,7 +53,7 @@ def extract_features_from_image(image_path):
 
     features = data.iloc[image_num, :42].values
     true_label_onehot = data.iloc[image_num, 42:].values
-    true_label = np.argmax(true_label_onehot) + 1
+    true_label = np.argmax(true_label_onehot)  # Utilisation de l'indice de la classe sans ajout de 1
     return features, true_label
 
 @app.route('/')
@@ -75,13 +77,13 @@ def predict_image():
         try:
             features, true_label = extract_features_from_image(file_path)
             predicted_letter = predict(features)
-            letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E'}
+            letters = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E'}  # Correspondance entre index et lettres
 
             os.remove(file_path)
 
             return render_template('upload.html',
                                  prediction=predicted_letter,
-                                 true_label=letters[true_label])
+                                 true_label=letters[true_label])  # Affichage du label réel
         except Exception as e:
             return jsonify({'error': str(e)}), 500
 
