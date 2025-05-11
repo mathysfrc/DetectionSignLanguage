@@ -9,7 +9,6 @@ app = Flask(__name__, static_folder='src/static', template_folder='src/templates
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Assurez-vous que le dossier uploads existe
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
@@ -32,7 +31,6 @@ def preprocess_image(features):
 def predict(features):
     nn = load_model()
     X = preprocess_image(features)
-    probabilities = nn.forward(X)
     prediction = nn.predict(X)[0]
     letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E'}
     return letters[prediction]
@@ -79,7 +77,6 @@ def predict_image():
             predicted_letter = predict(features)
             letters = {1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E'}
 
-            # Supprimez le fichier après traitement
             os.remove(file_path)
 
             return render_template('upload.html',

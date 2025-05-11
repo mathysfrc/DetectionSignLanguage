@@ -1,7 +1,5 @@
 import numpy as np
 
-
-
 class NeuralNetwork:
     def __init__(self):
 
@@ -21,11 +19,13 @@ class NeuralNetwork:
 
     # Définition des différentes fonctions d'activation et de leur dérivée
     def relu(self, x):
-        # La ReLU est définie comme max(0, x), ce qui signifie que les valeurs négatives deviennent 0, et les valeurs positives restent inchangées.
+        # La ReLU est définie comme max(0, x), ce qui signifie que les valeurs négatives deviennent 0,
+        # et les valeurs positives restent inchangées.
         return np.maximum(0, x)
 
     def relu_derivative(self, x):
-        # La dérivée de ReLU est 0 pour les entrées négatives et 1 pour les entrées positives. Cela est utilisé pendant la rétropropagation pour ajuster les poids en fonction de l'erreur.
+        # La dérivée de ReLU est 0 pour les entrées négatives et 1 pour les entrées positives.
+        # Cela est utilisé pendant la rétropropagation pour ajuster les poids en fonction de l'erreur.
         return np.where(x > 0, 1, 0)
 
     def softmax(self, x):
@@ -60,12 +60,13 @@ class NeuralNetwork:
 
         # 6)
         # Calcul de l'erreur de sortie (perte de la couche de sortie)
-        dz3 = output - y_onehot  # Signal d'erreur de la couche de sortie (différence entre la prédiction et la vérité)
+        dz3 = output - y_onehot  # Calcul d'erreur de la couche de sortie
         dw3 = np.dot(self.middle_output.T, dz3) / m  # Gradient de la perte par rapport aux poids de la couche de sortie
         db3 = np.sum(dz3, axis=0,
                      keepdims=True) / m  # Gradient de la perte par rapport aux biais de la couche de sortie
 
-        # 6.1) Calcul de l'erreur et du gradient pour la couche intermédiaire
+        # 6.1)
+        # Calcul de l'erreur et du gradient pour la couche intermédiaire
         da2 = np.dot(dz3,
                      self.weights_middle_output.T)  # Propagation de l'erreur à travers les poids de la couche intermédiaire
         dz2 = da2 * self.relu_derivative(
@@ -94,22 +95,13 @@ class NeuralNetwork:
         self.bias_input_hidden -= learning_rate * db1  # Mise à jour des biais de la couche cachée
 
     def train(self, X, y, epochs, learning_rate):
-        # Entraînement du modèle pour un nombre d'époques (itérations)
+        # Entraînement du modèle
         for epoch in range(epochs):
             output = self.forward(X)  # Propagation avant
             self.backward(X, y, output, learning_rate)  # Rétropropagation
 
-            m = X.shape[0]
-            # Calcul de la perte (cross-entropy) entre les prédictions et les vraies étiquettes
-            loss = -np.sum(np.log(output[np.arange(m), y] + 1e-15)) / m  # Perte de l'entropie croisée pour les classes
-            # Calcul de l'accuracy (précision)
-            accuracy = np.mean(np.argmax(output, axis=1) == y)  # Comparaison des prédictions avec les vraies étiquettes
-
-            if epoch % 10 == 0:
-                # Affichage de la perte et de l'accuracy tous les 10 epochs
-                print(f"Epoch {epoch}, Loss: {loss:.4f}, Accuracy: {accuracy:.4f}")
 
     def predict(self, X):
-        # Prédiction des classes à partir des entrées X
+        # Prédiction des classes à partir des entrées
         output = self.forward(X)
         return np.argmax(output, axis=1) + 1  # Retourne la classe prédite (entre 1 et 5)
